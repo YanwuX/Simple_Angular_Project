@@ -1,0 +1,32 @@
+<input ng-model="searchText" placeholder="Search..."></input>
+
+<table class="w3-table w3-bordered w3-striped">
+  <tr>
+    <th>Edit</th>
+    <th ng-click="sortBy('id')">ID<span class="sortorder" ng-show="sortReference === 'id'" ng-class="{reverse:reverse}"></span></th>
+    <th ng-click="sortBy('fName')">First Name<span class="sortorder" ng-show="sortReference === 'fName'" ng-class="{reverse:reverse}"></span></th>
+    <th ng-click="sortBy('lName')">Last Name<span class="sortorder" ng-show="sortReference === 'lName'" ng-class="{reverse:reverse}"></span></th>
+    <th ng-click="sortBy('tittle')">Tittle<span class="sortorder" ng-show="sortReference === 'tittle'" ng-class="{reverse:reverse}"></span></th>
+    <th ng-click="sortBy('gender')">Gender<span class="sortorder" ng-show="sortReference === 'gender'" ng-class="{reverse:reverse}"></span></th>
+    <th ng-click="sortBy('age')">Age<span class="sortorder" ng-show="sortReference === 'age'" ng-class="{reverse:reverse}"></span></th>
+    <th>DB</th>
+    <th>Delete</th>
+  </tr>
+  <tr ng-repeat="user in users | orderBy: sortReference : reverse | filter : searchText ">
+    <td>
+      <a href="#/edit/{{ user.id }}"><button class="w3-btn w3-hover-green" ng-click="editUser(user.id)">&#9998; Edit</button></a>
+    </td>
+    <td>{{ user.id | ordinal}}</td>
+    <td><hello-Dir>{{ user.fName }}</hello-Dir></td>
+    <td>{{ user.lName }}</td>
+    <td>{{ user.tittle }}</td>
+    <td>{{ user.gender }}</td>
+    <td>{{ user.age }}</td>
+    <td>{{user.db}}</td>
+    <td>
+      <button class="w3-btn w3-hover-green" ng-click="deleteUser(user.id)"><i class="fa fa-trash"></i> Delete</button>
+    </td>
+  </tr>
+</table>
+
+<a href="#/create/"><button class="w3-btn w3-green w3-ripple" ng-click="addUser()">&#9998; Create New User</button></a>
